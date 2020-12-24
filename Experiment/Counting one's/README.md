@@ -8,15 +8,15 @@
 - MUTRATE = 0.03
 - MUTSTEP = 0.9
 - Max Fitness: 50.0 - TS
-- Max Fitness: 48.13212080670327 - RW
+- Max Fitness: 46.9937534034408 - RW
 
 - ![alt text](https://github.com/Liam1809/Bio_Computation/blob/main/Experiment/Counting%20one's/TSRWN100.png)
 
 - N = 100
 - MUTRATE = 0.03
 - MUTSTEP = 0.9
-- Max Fitness: 97.4691608297065 - TS
-- Max Fitness: 85.49495920877187 - RW
+- Max Fitness: 98.61599778697504 - TS
+- Max Fitness: 84.18984529423331 - RW
 
 ## TOURANMENT SELECTION 
 
@@ -27,17 +27,17 @@
 - MUTRATE = 0.03
 - MUTSTEP = 0.9
 - Max Fitness: 50.0
-- Mean Fitness: 49.33748339920336  
+- Mean Fitness: 49.46629078875493
 
 ### Vary MUTRATE
 - ![alt text](https://github.com/Liam1809/Bio_Computation/blob/main/Experiment/Counting%20one's/varyMUTRATETS.png)
 
 - N = 50
 - MUTSTEP = 0.9
-- Max Fitness: 44.19637126268802 - MUTRATE 0.3
-- Max Fitness: 50.0 - MUTRATE 0.03
-- Max Fitness: 49.47161428383565 - MUTRATE 0.003
-- Max Fitness: 43.46511407132277 - MUTRATE 0.0003
+- Max Fitness: 44.322739025242676 - MUTRATE 0.3
+- Max Fitness: 50.0 - MUTRATE 0.3
+- Max Fitness: 49.10608786326543 - MUTRATE 0.3
+- Max Fitness: 42.6666028718545 - MUTRATE 0.3
 
 
 ## ROULETTE WHEEL SELECTION 
@@ -48,15 +48,15 @@
 - N = 50
 - MUTRATE = 0.03
 - MUTSTEP = 0.9
-- Max Fitness: 46.96177417441182
-- Mean Fitness: 43.84003324129958
+- Max Fitness: 48.297451161234456
+- Mean Fitness: 45.41549856413016
 
 ### Vary MUTRATE
 - ![alt text](https://github.com/Liam1809/Bio_Computation/blob/main/Experiment/Counting%20one's/varyMUTRATERW.png)
 
 - N = 50
 - MUTSTEP = 0.9
-- Max Fitness: 43.303401930038 - MUTRATE 0.3
-- Max Fitness: 48.38833352958358 - MUTRATE 0.03
-- Max Fitness: 42.968414592087086 - MUTRATE 0.003
-- Max Fitness: 38.41793839680722 - MUTRATE 0.0003
+- Max Fitness: 40.83573375201377 - MUTRATE 0.3
+- Max Fitness: 48.001452528286876 - MUTRATE 0.03
+- Max Fitness: 42.398036522166805 - MUTRATE 0.003
+- Max Fitness: 39.74645609300905 - MUTRATE 0.0003
