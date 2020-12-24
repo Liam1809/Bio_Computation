@@ -196,13 +196,12 @@ def optimising(population, new_population):
    
     return population
 
-def GA(Selection, MUTRATE, MUTSTEP):
+def GA(population, Selection, MUTRATE, MUTSTEP):
     # storing data to plot
     meanFit_values = []
     maxFit_values = []
     # ===========GENETIC ALGORITHM===============
-    # initialise original population
-    population = initialise_population()
+    
     for gen in range(0, GENERATIONS):
         # # touranment/ RW selection process
         offspring = Selection(population)
@@ -264,8 +263,11 @@ N = 50
 plt.title("Maximisation GA \n Touranment and Roulette Wheel Selection \n" 
             + "N = " + str(N) + " MUTRATE = " + str(MUTRATE) + " MUTSTEP = " + str(MUTSTEP))
 
-maxFit_data1, meanFit_data1 = GA(touranment_selection, 0.03, 0.9)
-maxFit_data2, meanFit_data2 = GA(RW_selection, 0.03, 0.9)
+# initialise original population
+population = initialise_population()
+
+maxFit_data1, meanFit_data1 = GA(population, touranment_selection, 0.03, 0.9)
+maxFit_data2, meanFit_data2 = GA(population, RW_selection, 0.03, 0.9)
 
 plt.plot(maxFit_data1, label="Touranment")
 plt.plot(maxFit_data2, label="Roulette Wheel")
@@ -275,13 +277,16 @@ plt.plot(maxFit_data2, label="Roulette Wheel")
 # MUTRATE = 0.03
 # MUTSTEP = 0.9
 # Max Fitness: 50.0 - TS
-# Max Fitness: 48.13212080670327 - RW
+# Max Fitness: 46.9937534034408 - RW
+
+
 
 # N = 100
 # MUTRATE = 0.03
 # MUTSTEP = 0.9
-# Max Fitness: 97.4691608297065 - TS
-# Max Fitness: 85.49495920877187 - RW
+# Max Fitness: 98.61599778697504 - TS
+# Max Fitness: 84.18984529423331 - RW
+
 
 
 # =============================================================
@@ -293,7 +298,11 @@ plt.plot(maxFit_data2, label="Roulette Wheel")
 # [----------------- UNCOMMENT THIS TO TEST -----------------]
 # plt.title("Maximisation GA - Touranment Selection \n"
 #             + "N = " + str(N) + " MUTRATE = " + str(MUTRATE) + " MUTSTEP = " + str(MUTSTEP))
-# maxFit_data1, meanFit_data1 = GA(touranment_selection, 0.03, 0.9)
+
+# # initialise original population
+# population = initialise_population()
+
+# maxFit_data1, meanFit_data1 = GA(population, touranment_selection, 0.03, 0.9)
 
 # plt.plot(maxFit_data1, label="Max Fitness")
 # plt.plot(meanFit_data1, label="Mean Fitness")
@@ -302,17 +311,22 @@ plt.plot(maxFit_data2, label="Roulette Wheel")
 # MUTRATE = 0.03
 # MUTSTEP = 0.9
 # Max Fitness: 50.0
-# Mean Fitness: 49.33748339920336  
+# Mean Fitness: 49.46629078875493
+
 
 
 # Vary MUTRATE
 # [----------------- UNCOMMENT THIS TO TEST -----------------]
 # plt.title("Maximisation GA - Touranment Selection \n" 
 #             + "Vary MUTRATE")
-# maxFit_data1, meanFit_data1 = GA(touranment_selection, 0.3, 0.9)
-# maxFit_data2, meanFit_data2 = GA(touranment_selection, 0.03, 0.9)
-# maxFit_data3, meanFit_data3 = GA(touranment_selection, 0.003, 0.9)
-# maxFit_data4, meanFit_data4 = GA(touranment_selection, 0.0003, 0.9)
+
+# # initialise original population
+# population = initialise_population()
+
+# maxFit_data1, meanFit_data1 = GA(population, touranment_selection, 0.3, 0.9)
+# maxFit_data2, meanFit_data2 = GA(population, touranment_selection, 0.03, 0.9)
+# maxFit_data3, meanFit_data3 = GA(population, touranment_selection, 0.003, 0.9)
+# maxFit_data4, meanFit_data4 = GA(population, touranment_selection, 0.0003, 0.9)
 
 # plt.plot(maxFit_data1, label="MUTRATE 0.3")
 # plt.plot(maxFit_data2, label="MUTRATE 0.03")
@@ -321,10 +335,11 @@ plt.plot(maxFit_data2, label="Roulette Wheel")
 # [----------------- UNCOMMENT THIS TO TEST -----------------]
 # N = 50
 # MUTSTEP = 0.9
-# Max Fitness: 44.19637126268802 - MUTRATE 0.3
-# Max Fitness: 50.0 - MUTRATE 0.03
-# Max Fitness: 49.47161428383565 - MUTRATE 0.003
-# Max Fitness: 43.46511407132277 - MUTRATE 0.0003
+# Max Fitness: 44.322739025242676 - MUTRATE 0.3
+# Max Fitness: 50.0 - MUTRATE 0.3
+# Max Fitness: 49.10608786326543 - MUTRATE 0.3
+# Max Fitness: 42.6666028718545 - MUTRATE 0.3
+
 
 
 
@@ -337,7 +352,11 @@ plt.plot(maxFit_data2, label="Roulette Wheel")
 # [----------------- UNCOMMENT THIS TO TEST -----------------]
 # plt.title("Maximisation GA - Roulette Wheel Selection \n"
 #             + "N = " + str(N) + " MUTRATE = " + str(MUTRATE) + " MUTSTEP = " + str(MUTSTEP))
-# maxFit_data1, meanFit_data1 = GA(RW_selection, 0.03, 0.9)
+
+# # initialise original population
+# population = initialise_population()
+
+# maxFit_data1, meanFit_data1 = GA(population, RW_selection, 0.03, 0.9)
 
 # plt.plot(maxFit_data1, label="Max Fitness")
 # plt.plot(meanFit_data1, label="Mean Fitness")
@@ -345,18 +364,22 @@ plt.plot(maxFit_data2, label="Roulette Wheel")
 # N = 50
 # MUTRATE = 0.03
 # MUTSTEP = 0.9
-# Max Fitness: 46.96177417441182
-# Mean Fitness: 43.84003324129958
+# Max Fitness: 48.297451161234456
+# Mean Fitness: 45.41549856413016
 
 
 # Vary MUTRATE
 # [----------------- UNCOMMENT THIS TO TEST -----------------]
 # plt.title("Maximisation GA - Roulette Wheel Selection \n" 
 #             + "Vary MUTRATE")
-# maxFit_data1, meanFit_data1 = GA(RW_selection, 0.3, 0.9)
-# maxFit_data2, meanFit_data2 = GA(RW_selection, 0.03, 0.9)
-# maxFit_data3, meanFit_data3 = GA(RW_selection, 0.003, 0.9)
-# maxFit_data4, meanFit_data4 = GA(RW_selection, 0.0003, 0.9)
+
+# # initialise original population
+# population = initialise_population()
+
+# maxFit_data1, meanFit_data1 = GA(population, RW_selection, 0.3, 0.9)
+# maxFit_data2, meanFit_data2 = GA(population, RW_selection, 0.03, 0.9)
+# maxFit_data3, meanFit_data3 = GA(population, RW_selection, 0.003, 0.9)
+# maxFit_data4, meanFit_data4 = GA(population, RW_selection, 0.0003, 0.9)
 
 # plt.plot(maxFit_data1, label="MUTRATE 0.3")
 # plt.plot(maxFit_data2, label="MUTRATE 0.03")
@@ -365,11 +388,10 @@ plt.plot(maxFit_data2, label="Roulette Wheel")
 # [----------------- UNCOMMENT THIS TO TEST -----------------]
 # N = 50
 # MUTSTEP = 0.9
-# Max Fitness: 43.303401930038 - MUTRATE 0.3
-# Max Fitness: 48.38833352958358 - MUTRATE 0.03
-# Max Fitness: 42.968414592087086 - MUTRATE 0.003
-# Max Fitness: 38.41793839680722 - MUTRATE 0.0003
-
+# Max Fitness: 40.83573375201377 - MUTRATE 0.3
+# Max Fitness: 48.001452528286876 - MUTRATE 0.03
+# Max Fitness: 42.398036522166805 - MUTRATE 0.003
+# Max Fitness: 39.74645609300905 - MUTRATE 0.0003
 
 
 
