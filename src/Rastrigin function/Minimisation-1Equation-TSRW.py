@@ -348,7 +348,7 @@ plt.plot(minFit_data2, label="Roulette Wheel")
 # Min Fitness: 12.5460038868992 - MUTRATE 0.3
 # Min Fitness: 0.4921120534116028 - MUTRATE 0.03 
 # Min Fitness: 8.66909400410961 - MUTRATE 0.003
-# Min Fitness: 26.745458844423908- MUTRATE 0.0003
+# Min Fitness: 26.745458844423908 - MUTRATE 0.0003
 
 
 
