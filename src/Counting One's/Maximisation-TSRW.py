@@ -350,6 +350,7 @@ plt.plot(maxFit_data2, label="Roulette Wheel")
 
 # Best Fitness and Mean Fitness of RW
 # [----------------- UNCOMMENT THIS TO TEST -----------------]
+# GENERATIONS = 200
 # plt.title("Maximisation GA - Roulette Wheel Selection \n"
 #             + "N = " + str(N) + " MUTRATE = " + str(MUTRATE) + " MUTSTEP = " + str(MUTSTEP))
 
@@ -364,12 +365,13 @@ plt.plot(maxFit_data2, label="Roulette Wheel")
 # N = 50
 # MUTRATE = 0.03
 # MUTSTEP = 0.9
-# Max Fitness: 48.297451161234456
-# Mean Fitness: 45.41549856413016
+# Max Fitness: 49.68134975149576
+# Mean Fitness: 45.90391924550532
 
 
 # Vary MUTRATE
 # [----------------- UNCOMMENT THIS TO TEST -----------------]
+# GENERATIONS = 200
 # plt.title("Maximisation GA - Roulette Wheel Selection \n" 
 #             + "Vary MUTRATE")
 
@@ -388,10 +390,10 @@ plt.plot(maxFit_data2, label="Roulette Wheel")
 # [----------------- UNCOMMENT THIS TO TEST -----------------]
 # N = 50
 # MUTSTEP = 0.9
-# Max Fitness: 40.83573375201377 - MUTRATE 0.3
-# Max Fitness: 48.001452528286876 - MUTRATE 0.03
-# Max Fitness: 42.398036522166805 - MUTRATE 0.003
-# Max Fitness: 39.74645609300905 - MUTRATE 0.0003
+# Max Fitness: 42.21149205376807 - MUTRATE 0.3
+# Max Fitness: 49.62520845180895 - MUTRATE 0.03
+# Max Fitness: 48.75858687274626 - MUTRATE 0.003
+# Max Fitness: 42.5484988452875 - MUTRATE 0.0003
 
 
 
@@ -399,14 +401,3 @@ plt.plot(maxFit_data2, label="Roulette Wheel")
 # DISPLAY PLOT
 plt.legend(loc = "lower right")
 plt.show()
-
-
-
-
-
-
-
-
-
-
-

@@ -48,15 +48,17 @@
 - N = 50
 - MUTRATE = 0.03
 - MUTSTEP = 0.9
-- Max Fitness: 48.297451161234456
-- Mean Fitness: 45.41549856413016
+- GENERATIONS = 200
+- Max Fitness: 49.68134975149576
+- Mean Fitness: 45.90391924550532
 
 ### Vary MUTRATE
 - ![alt text](https://github.com/Liam1809/Bio_Computation/blob/main/Experiment/Counting%20one's/varyMUTRATERW.png)
 
 - N = 50
 - MUTSTEP = 0.9
-- Max Fitness: 40.83573375201377 - MUTRATE 0.3
-- Max Fitness: 48.001452528286876 - MUTRATE 0.03
-- Max Fitness: 42.398036522166805 - MUTRATE 0.003
-- Max Fitness: 39.74645609300905 - MUTRATE 0.0003
+- GENERATIONS = 200
+- Max Fitness: 42.21149205376807 - MUTRATE 0.3
+- Max Fitness: 49.62520845180895 - MUTRATE 0.03
+- Max Fitness: 48.75858687274626 - MUTRATE 0.003
+- Max Fitness: 42.5484988452875 - MUTRATE 0.0003
