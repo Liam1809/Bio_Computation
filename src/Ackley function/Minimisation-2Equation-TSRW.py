@@ -5,24 +5,29 @@ import matplotlib.pyplot as plt
 
 # Each individual should be represented by a data structure,
 # consisting of an array of binary genes and a fitness value
+
+
 class individual:
     gene = []
     fitness = 0
 
     def __repr__(self):
-        return "Gene string " +  "".join(str(x) for x in self.gene) + " - fitness: " + str(self.fitness)
+        return "Gene string " + "".join(str(x) for x in self.gene) + " - fitness: " + str(self.fitness)
+
 
 # The initial population array of such individuals,
-# and random gene length number of 10 and population of 50 
+# and random gene length number of 10 and population of 50
 P = 50
 N = 10
-GENERATIONS = 150 # initialise 150 generations
- # random mutation rate and mutation step
+GENERATIONS = 500  # initialise 500 generations
+# random mutation rate and mutation step
 MUTRATE = 0.03
-MUTSTEP = 0.3
+MUTSTEP = 1.0
 
 # Calculate individual's fitness
 # first minimisation function
+
+
 def mini_function(ind):
     fitness = 0
     first_exp = 0
@@ -32,11 +37,13 @@ def mini_function(ind):
         second_exp += ind.gene[i] * ind.gene[i]
     first_exp = math.exp((1/N) * first_exp)
     second_exp = (-20) * math.exp((-0.2) * math.sqrt((1/N) * second_exp))
-    fitness = second_exp - first_exp 
+    fitness = second_exp - first_exp
     return fitness
 
 # Calculate population's fitness
 # list parameter
+
+
 def total_fitness(population):
     totalfit = 0
     for ind in population:
@@ -44,6 +51,8 @@ def total_fitness(population):
     return totalfit
 
 # Initialise original population
+
+
 def initialise_population():
     population = []
     # Initialise population with random candidate solutions
@@ -52,16 +61,21 @@ def initialise_population():
     for x in range(0, P):
         tempgene = []
         for x in range(0, N):
-            tempgene.append(random.uniform(-32.0, 32.0)) # a random gene between -5.12 and 5.12(inclusive)
+            # a random gene between -5.12 and 5.12(inclusive)
+            tempgene.append(random.uniform(-32.0, 32.0))
         # print(tempgene)
-        newindi = individual() # initialise new instance
-        newindi.gene = tempgene.copy() # copy the gene from tempgene and assign to gene of individual
-        newindi.fitness = mini_function(newindi) # initialise instance's fitness 
+        newindi = individual()  # initialise new instance
+        # copy the gene from tempgene and assign to gene of individual
+        newindi.gene = tempgene.copy()
+        # initialise instance's fitness
+        newindi.fitness = mini_function(newindi)
         population.append(newindi)
-    
+
     return population
 
 # Tourament Selection Process
+
+
 def touranment_selection(population):
     offspring = []
     # Select two parents and recombine pairs of parents
@@ -70,7 +84,8 @@ def touranment_selection(population):
         off1 = population[parent1]
         parent2 = random.randint(0, P - 1)
         off2 = population[parent2]
-        if (off1.fitness > off2.fitness): # if one's fitness higher then add the smaller one to temp offsptring
+        # if one's fitness higher then add the smaller one to temp offsptring
+        if (off1.fitness > off2.fitness):
             offspring.append(off2)
         else:
             offspring.append(off1)
@@ -78,12 +93,14 @@ def touranment_selection(population):
     return offspring
 
 # Roulette Wheel Selection Process
+
+
 def RW_selection(population):
     # total fitness of initial pop
     total = 0
     for ind in population:
         total += abs(ind.fitness)
-        
+
     offspring = []
     # Roulette Wheel Selection Process
     # Select two parents and recombine pairs of parents
@@ -96,7 +113,7 @@ def RW_selection(population):
             j += 1
             if(j == P):
                 break
-            
+
         # print(running_total)
         # print(j)
         offspring.append(copy.deepcopy(population[j-1]))
@@ -104,11 +121,14 @@ def RW_selection(population):
     return offspring
 
 # Single-point Crossover process
+
+
 def crossover(offspring):
     # Recombine pairs of parents from offspring
     crossover_offspring = []
     for i in range(0, P, 2):
-        crosspoint = random.randint(1, N - 1) #pick up one random point in the gene length
+        # pick up one random point in the gene length
+        crosspoint = random.randint(1, N - 1)
         # 2 new temporary instances
         temp1 = individual()
         temp2 = individual()
@@ -130,21 +150,24 @@ def crossover(offspring):
         # print(head1, tail2)
         # print("head2 + tail1")
         # print(head2, tail1)
-        temp1.gene = head1 + tail2 # add first gene after crossover to temp1
-        temp2.gene = head2 + tail1 # add second gene after crossover to temp2
-        temp1.fitness = mini_function(temp1) # call counting_ones to add fitness to temporary indv
+        temp1.gene = head1 + tail2  # add first gene after crossover to temp1
+        temp2.gene = head2 + tail1  # add second gene after crossover to temp2
+        # call counting_ones to add fitness to temporary indv
+        temp1.fitness = mini_function(temp1)
         temp2.fitness = mini_function(temp2)
         # append temp1, temp2 respectively to crosover_offspring_offspring
-        crossover_offspring.append(temp1) 
+        crossover_offspring.append(temp1)
         crossover_offspring.append(temp2)
         # print(crosover_offspring_offspring[i].gene, crosover_offspring_offspring[i+1].gene)
 
     return crossover_offspring
 
-#Bit-wise Mutation
+# Bit-wise Mutation
+
+
 def mutation(crossover_offspring, MUTRATE, MUTSTEP):
     # Mutate the result of new_offspring
-    #Bit-wise Mutation
+    # Bit-wise Mutation
     mutate_offspring = []
 
     for i in range(0, P):
@@ -155,28 +178,33 @@ def mutation(crossover_offspring, MUTRATE, MUTSTEP):
             ALTER = random.uniform(0.0, MUTSTEP)
             MUTPROB = random.uniform(0.0, 100.0)
             if (MUTPROB < (100*MUTRATE)):
-                if(random.randint(0, 1) == 1): # if random num is 1, add ALTER
+                if(random.randint(0, 1) == 1):  # if random num is 1, add ALTER
                     gene += ALTER
-                else: # if random num is 0, minus ALTER
+                else:  # if random num is 0, minus ALTER
                     gene -= ALTER
-                if(gene > 32.0): # if gene value is larger than 32.0, reset it to 32.0
+                if(gene > 32.0):  # if gene value is larger than 32.0, reset it to 32.0
                     gene = 32.0
-                if(gene < -32.0): # if gene value is smaller than -32.0, reset it to -32.0
+                if(gene < -32.0):  # if gene value is smaller than -32.0, reset it to -32.0
                     gene = -32.0
             new_indi.gene.append(gene)
-        new_indi.fitness = mini_function(new_indi) # add fitness to instance by calling mini_function
+        # add fitness to instance by calling mini_function
+        new_indi.fitness = mini_function(new_indi)
         mutate_offspring.append(new_indi)
-    
+
     return mutate_offspring
 
 # Descending sorting
+
+
 def sorting(population):
     #  descending sorting based on individual's fitness
-    population.sort(key=lambda individual:individual.fitness, reverse=True)
+    population.sort(key=lambda individual: individual.fitness, reverse=True)
 
     return population
 
 # Minimisation Optimisation
+
+
 def optimising(population, new_population):
     # more optimising
     # sorting instance with descending fitness
@@ -205,9 +233,9 @@ def optimising(population, new_population):
     if(worstFit_old_2.fitness < bestFit_new_2.fitness):
         population[1].gene = worstFit_old_2.gene
         population[1].fitness = worstFit_old_2.fitness
-   
-   
+
     return population
+
 
 def GA(population, Selection, MUTRATE, MUTSTEP):
     # ===========GENETIC ALGORITHM===============
@@ -215,7 +243,6 @@ def GA(population, Selection, MUTRATE, MUTSTEP):
     meanFit_values = []
     minFit_values = []
 
-    
     for gen in range(0, GENERATIONS):
         # touranment selection process
         offspring = Selection(population)
@@ -233,8 +260,8 @@ def GA(population, Selection, MUTRATE, MUTSTEP):
             Fit.append(mini_function(ind))
         # print(Fit)
 
-        minFit = min(Fit) # take out the min fitness among fitnesses in Fit
-        meanFit = sum(Fit)/ P # sum all the fitness and divide by P size
+        minFit = min(Fit)  # take out the min fitness among fitnesses in Fit
+        meanFit = sum(Fit) / P  # sum all the fitness and divide by P size
 
         # append minFit and meanFit respectively to MinFit_values and MeanFit_values
         minFit_values.append(minFit)
@@ -243,10 +270,10 @@ def GA(population, Selection, MUTRATE, MUTSTEP):
         # # display
         # print("GENERATION " + str(gen + 1))
     print("Min Fitness: " + str(minFit) + "\n")
-    print("Mean Fitness: " + str(meanFit) + "\n") 
-
+    print("Mean Fitness: " + str(meanFit) + "\n")
 
     return minFit_values, meanFit_values
+
 
 # plotting
 plt.ylabel("Fitness")
@@ -271,15 +298,16 @@ meanFit_data4 = []
 # =============================================================
 
 # [----------------- UNCOMMENT THIS AND ALTER N TO TEST -----------------]
-plt.title("Minimisation GA \n Touranment and Roulette Wheel Selection \n" 
-            + "N = " + str(N) + " MUTRATE = " + str(MUTRATE) + " MUTSTEP = " + str(MUTSTEP))
-
 N = 10
+GENERATIONS = 500
+plt.title("Minimisation GA \n Touranment and Roulette Wheel Selection \n"
+          + "N = " + str(N) + " MUTRATE = " + str(MUTRATE) + " MUTSTEP = " + str(MUTSTEP))
+
 # initialise original population
 population = initialise_population()
 
-minFit_data1, meanFit_data1 = GA(population, touranment_selection, 0.03, 0.3)
-minFit_data2, meanFit_data2 = GA(population, RW_selection, 0.03, 0.3)
+minFit_data1, meanFit_data1 = GA(population, touranment_selection, 0.03, 1.0)
+minFit_data2, meanFit_data2 = GA(population, RW_selection, 0.03, 1.0)
 
 plt.plot(minFit_data1, label="Touranment")
 plt.plot(minFit_data2, label="Roulette Wheel")
@@ -287,19 +315,18 @@ plt.plot(minFit_data2, label="Roulette Wheel")
 
 # N = 10
 # MUTRATE = 0.03
-# MUTSTEP = 0.3
-# Min Fitness: -10.708492338435587 - TS
-# Min Fitness: -9.426192516643226 - RW
+# MUTSTEP = 1.0
+# GENERATIONS = 500
+# Min Fitness: -22.70467498720863 - TS
+# Min Fitness: -22.660896711024847 - RW
 
 
-
-# N = 50
+# N = 20
 # MUTRATE = 0.03
-# MUTSTEP = 0.3
-# Min Fitness: -4.225967898881414 - TS
-# Min Fitness: -4.0251242091551624 - RW
-
-
+# MUTSTEP = 1.0
+# GENERATIONS = 2000
+# Min Fitness: -22.711527080568395 - TS
+# Min Fitness: -22.492373930549075 - RW
 
 
 # =============================================================
@@ -310,37 +337,35 @@ plt.plot(minFit_data2, label="Roulette Wheel")
 # Best Fitness and Mean Fitness of TS
 # [----------------- UNCOMMENT THIS TO TEST -----------------]
 # plt.title("Minimisation GA - Touranment Selection \n"
-#             + "N = " + str(N) + " MUTRATE = " + str(MUTRATE) + " MUTSTEP = " + str(MUTSTEP))
+#           + "N = " + str(N) + " MUTRATE = " + str(MUTRATE) + " MUTSTEP = " + str(MUTSTEP))
 
 # # initialise original population
 # population = initialise_population()
 
-# minFit_data1, meanFit_data1 = GA(population, touranment_selection, 0.03, 0.3)
+# minFit_data1, meanFit_data1 = GA(population, touranment_selection, 0.03, 1.0)
 
 # plt.plot(minFit_data1, label="Min Fitness")
 # plt.plot(meanFit_data1, label="Mean Fitness")
 # [----------------- UNCOMMENT THIS TO TEST -----------------]
 # N = 10
 # MUTRATE = 0.03
-# MUTSTEP = 0.3
-# Min Fitness: -10.852278293354441
-# Mean Fitness: -10.804764892978262
-
-
+# MUTSTEP = 1.0
+# Min Fitness: -22.69766205527787
+# Mean Fitness: -22.482874238764634
 
 
 # Vary MUTRATE
 # [----------------- UNCOMMENT THIS TO TEST -----------------]
-# plt.title("Minimisation GA - Touranment Selection \n" 
-#             + "Vary MUTRATE")
+# plt.title("Minimisation GA - Touranment Selection \n"
+#           + "Vary MUTRATE")
 
 # # initialise original population
 # population = initialise_population()
 
-# minFit_data1, meanFit_data1 = GA(population, touranment_selection, 0.3, 0.3)
-# minFit_data2, meanFit_data2 = GA(population, touranment_selection, 0.03, 0.3)
-# minFit_data3, meanFit_data3 = GA(population, touranment_selection, 0.003, 0.3)
-# minFit_data4, meanFit_data4 = GA(population, touranment_selection, 0.0003, 0.3)
+# minFit_data1, meanFit_data1 = GA(population, touranment_selection, 0.3, 1.0)
+# minFit_data2, meanFit_data2 = GA(population, touranment_selection, 0.03, 1.0)
+# minFit_data3, meanFit_data3 = GA(population, touranment_selection, 0.003, 1.0)
+# minFit_data4, meanFit_data4 = GA(population, touranment_selection, 0.0003, 1.0)
 
 # plt.plot(minFit_data1, label="MUTRATE 0.3")
 # plt.plot(minFit_data2, label="MUTRATE 0.03")
@@ -348,14 +373,11 @@ plt.plot(minFit_data2, label="Roulette Wheel")
 # plt.plot(minFit_data4, label="MUTRATE 0.0003")
 # [----------------- UNCOMMENT THIS TO TEST -----------------]
 # N = 10
-# MUTSTEP = 0.3
-# Min Fitness: -8.610121679863145 - MUTRATE 0.3
-# Min Fitness: -11.170587355807932 - MUTRATE 0.03
-# Min Fitness: -9.524295765255925 - MUTRATE 0.003
-# Min Fitness: -8.867615254560471 - MUTRATE 0.0003
-
-
-
+# MUTSTEP = 1.0
+# Min Fitness: -22.217696415755263 - MUTRATE 0.3
+# Min Fitness: -22.70308682584893 - MUTRATE 0.03
+# Min Fitness: -16.68581671572027 - MUTRATE 0.003
+# Min Fitness: -14.860042035928736 - MUTRATE 0.0003
 
 
 # =============================================================
@@ -366,37 +388,34 @@ plt.plot(minFit_data2, label="Roulette Wheel")
 # Best Fitness and Mean Fitness of RW
 # [----------------- UNCOMMENT THIS TO TEST -----------------]
 # plt.title("Minimisation GA - Roulette Wheel Selection \n"
-#             + "N = " + str(N) + " MUTRATE = " + str(MUTRATE) + " MUTSTEP = " + str(MUTSTEP))
+#           + "N = " + str(N) + " MUTRATE = " + str(MUTRATE) + " MUTSTEP = " + str(MUTSTEP))
 
 # # initialise original population
 # population = initialise_population()
 
-# minFit_data1, meanFit_data1 = GA(population, RW_selection, 0.03, 0.3)
+# minFit_data1, meanFit_data1 = GA(population, RW_selection, 0.03, 1.0)
 
 # plt.plot(minFit_data1, label="Min Fitness")
 # plt.plot(meanFit_data1, label="Mean Fitness")
 # [----------------- UNCOMMENT THIS TO TEST -----------------]
 # N = 10
 # MUTRATE = 0.03
-# MUTSTEP = 0.3
-# Min Fitness: -7.929936862642863
-# Mean Fitness: -7.686559831777039
-
-
-
+# MUTSTEP = 1.0
+# Min Fitness: -20.795512818455332
+# Mean Fitness: -19.624791800370012
 
 
 # Vary MUTRATE
 # [----------------- UNCOMMENT THIS TO TEST -----------------]
-# plt.title("Minimisation GA - Roulette Wheel Selection \n" 
-#             + "Vary MUTRATE")
+# plt.title("Minimisation GA - Roulette Wheel Selection \n"
+#           + "Vary MUTRATE")
 # # initialise original population
 # population = initialise_population()
 
-# minFit_data1, meanFit_data1 = GA(population, RW_selection, 0.3, 0.3)
-# minFit_data2, meanFit_data2 = GA(population, RW_selection, 0.03, 0.3)
-# minFit_data3, meanFit_data3 = GA(population, RW_selection, 0.003, 0.3)
-# minFit_data4, meanFit_data4 = GA(population, RW_selection, 0.0003, 0.3)
+# minFit_data1, meanFit_data1 = GA(population, RW_selection, 0.3, 1.0)
+# minFit_data2, meanFit_data2 = GA(population, RW_selection, 0.03, 1.0)
+# minFit_data3, meanFit_data3 = GA(population, RW_selection, 0.003, 1.0)
+# minFit_data4, meanFit_data4 = GA(population, RW_selection, 0.0003, 1.0)
 
 # plt.plot(minFit_data1, label="MUTRATE 0.3")
 # plt.plot(minFit_data2, label="MUTRATE 0.03")
@@ -405,18 +424,12 @@ plt.plot(minFit_data2, label="Roulette Wheel")
 # [----------------- UNCOMMENT THIS TO TEST -----------------]
 # N = 10
 # MUTSTEP = 0.3
-# Min Fitness: -14.254437249778938 - MUTRATE 0.3
-# Min Fitness: -10.447878031888726 - MUTRATE 0.03
-# Min Fitness: -9.727185493333165 - MUTRATE 0.003
-# Min Fitness: -8.94342734801122 - MUTRATE 0.0003
-
-
+# Min Fitness: -21.630902608565513 - MUTRATE 0.3
+# Min Fitness: -22.537768512420485 - MUTRATE 0.03
+# Min Fitness: -14.327707795023953 - MUTRATE 0.003
+# Min Fitness: -10.099371746515887 - MUTRATE 0.0003
 
 
 # DISPLAY PLOT
-plt.legend(loc = "upper right")
+plt.legend(loc="upper right")
 plt.show()
-
-
-
-
