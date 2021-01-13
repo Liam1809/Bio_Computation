@@ -10,14 +10,14 @@
 - Min Fitness: 0.35614317207772217 - TS
 - Min Fitness: 2.646551764532333 - RW
 
-- ![alt text](https://github.com/Liam1809/Bio_Computation/blob/main/Experiment/Rastrigin%20function/TSRWN20.png)
+- ![alt text](https://github.com/Liam1809/Bio_Computation/blob/main/Experiment/Rastrigin%20function/TSRWN50.png)
 
-- N = 20
-- GENERATIONS = 300
+- N = 50
+- GENERATIONS = 4000
 - MUTRATE = 0.03
 - MUTSTEP = 1.0
-- Min Fitness: 0.9973430696900323 - TS
-- Min Fitness: 4.102001421670991 - RW
+- Min Fitness: 0.31650039450556733 - TS
+- Min Fitness: 0.831967707844683 - RW
 
 
 ## TOURANMENT SELECTION 
