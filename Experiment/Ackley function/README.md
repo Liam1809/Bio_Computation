@@ -6,17 +6,19 @@
 
 - N = 10
 - MUTRATE = 0.03
-- MUTSTEP = 0.3
-- Min Fitness: -10.708492338435587 - TS
-- Min Fitness: -9.426192516643226 - RW
+- MUTSTEP = 1.0
+- GENERATIONS = 500
+- Min Fitness: -22.70467498720863 - TS
+- Min Fitness: -22.660896711024847 - RW
 
-- ![alt text](https://github.com/Liam1809/Bio_Computation/blob/main/Experiment/Ackley%20function/TSRWN50.png)
+- ![alt text](https://github.com/Liam1809/Bio_Computation/blob/main/Experiment/Ackley%20function/TSRWN20.png)
 
-- N = 50
+- N = 20
 - MUTRATE = 0.03
-- MUTSTEP = 0.3
-- Min Fitness: -4.225967898881414 - TS
-- Min Fitness: -4.0251242091551624 - RW
+- MUTSTEP = 1.0
+- GENERATIONS = 2000
+- Min Fitness: -22.711527080568395 - TS
+- Min Fitness: -22.492373930549075 - RW
 
 
 ## TOURANMENT SELECTION 
@@ -26,19 +28,19 @@
 
 - N = 10
 - MUTRATE = 0.03
-- MUTSTEP = 0.3
-- Min Fitness: -10.852278293354441
-- Mean Fitness: -10.804764892978262
+- MUTSTEP = 1.0
+- Min Fitness: -22.69766205527787
+- Mean Fitness: -22.482874238764634
 
 ### Vary MUTRATE
 - ![alt text](https://github.com/Liam1809/Bio_Computation/blob/main/Experiment/Ackley%20function/varyMUTRATETS.png)
 
 - N = 10
-- MUTSTEP = 0.3
-- Min Fitness: -8.610121679863145 - MUTRATE 0.3
-- Min Fitness: -11.170587355807932 - MUTRATE 0.03
-- Min Fitness: -9.524295765255925 - MUTRATE 0.003
-- Min Fitness: -8.867615254560471 - MUTRATE 0.0003
+- MUTSTEP = 1.0
+- Min Fitness: -22.217696415755263 - MUTRATE 0.3
+- Min Fitness: -22.70308682584893 - MUTRATE 0.03
+- Min Fitness: -16.68581671572027 - MUTRATE 0.003
+- Min Fitness: -14.860042035928736 - MUTRATE 0.0003
 
 
 ## ROULETTE WHEEL SELECTION 
@@ -48,15 +50,15 @@
 
 - N = 10
 - MUTRATE = 0.03
-- MUTSTEP = 0.3
-- Min Fitness: -7.929936862642863
-- Mean Fitness: -7.686559831777039
+- MUTSTEP = 1.0
+- Min Fitness: -20.795512818455332
+- Mean Fitness: -19.624791800370012
 
 ### Vary MUTRATE
 - ![alt text](https://github.com/Liam1809/Bio_Computation/blob/main/Experiment/Ackley%20function/varyMUTRATERW.png)
 
-- MUTSTEP = 0.3
-- Min Fitness: -14.254437249778938 - MUTRATE 0.3
-- Min Fitness: -10.447878031888726 - MUTRATE 0.03
-- Min Fitness: -9.727185493333165 - MUTRATE 0.003
-- Min Fitness: -8.94342734801122 - MUTRATE 0.0003
+- N = 10- MUTSTEP = 0.3
+- Min Fitness: -21.630902608565513 - MUTRATE 0.3
+- Min Fitness: -22.537768512420485 - MUTRATE 0.03
+- Min Fitness: -14.327707795023953 - MUTRATE 0.003
+- Min Fitness: -10.099371746515887 - MUTRATE 0.0003
